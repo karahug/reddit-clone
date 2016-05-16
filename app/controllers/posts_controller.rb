@@ -1,10 +1,12 @@
 class PostsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, only: [:create, :edit, :new, :destroy]
   
   def edit
+    @post = Post.find(params[:id])
   end
 
   def update
+    @post = Post.find(params[:id])
     @post.update_attributes(post_params)
     @post.save
     redirect_to @post
@@ -21,12 +23,18 @@ class PostsController < ApplicationController
   end
   
   def create
-    @post = Post.new(post_params)
+    @post = Post.new(post_params.merge(user_id: current_user.id))
     @post.save
     redirect_to @post
   end
   
   def destroy
+    @post = Post.find(params[:id])
+    if current_user == @post.user
+      @post.destroy
+      redirect_to root_path
+    end
+    nil
   end
   
   
@@ -35,9 +43,9 @@ class PostsController < ApplicationController
   end
   
   def post_params
-    params.require(:post).permit(:title, :content, :author, :link)
+    params.require(:post).permit(:title, :content, :link)
   end
   
-  def edit
+  def show
   end
 end

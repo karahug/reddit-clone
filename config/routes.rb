@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   get 'posts/upvote'
 
   get 'posts/downvote'
+  
+  get 'posts/show'
+  
+  delete 'posts/destroy'
 
   get 'posts/create'
   devise_for :users

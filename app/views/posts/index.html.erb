@@ -9,7 +9,14 @@
 
 <% @posts.each do |p| %>
     <p>
-        <%= link_to(p.title, p) %>
+        <%= link_to(p.title, p.link) if not p.link.nil? %> 
+        <%= link_to(p.title, p) if p.link.nil? %><br />
+        <%= link_to("Comments", p) %>|
+        <% if p.user == current_user %>
+            <%= link_to("Delete", p, method: :delete) %>
+            |
+            <%= link_to("Edit", edit_post_path(p)) %>
+        <% end %>
     </p>
-    <hr />
+    
 <% end %>
