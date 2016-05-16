@@ -1,0 +1,15 @@
+<h1>Front Page</h1>
+<p>Find me in app/views/posts/index.html.erb</p>
+
+<div>
+    <%= link_to("New post", new_post_path) %>
+</div>
+
+<hr />
+
+<% @posts.each do |p| %>
+    <p>
+        <%= link_to(p.title, p) %>
+    </p>
+    <hr />
+<% end %>

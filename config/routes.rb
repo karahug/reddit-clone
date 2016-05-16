@@ -1,7 +1,19 @@
 Rails.application.routes.draw do
+  get 'posts/edit'
+
+  get 'posts/update'
+
+  get 'posts/new'
+
+  get 'posts/upvote'
+
+  get 'posts/downvote'
+
+  get 'posts/create'
   devise_for :users
-  root 'front_page#home'
+  root 'posts#index'
   resources :users
+  resources :posts
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
