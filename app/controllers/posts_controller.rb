@@ -40,6 +40,9 @@ class PostsController < ApplicationController
   
   def index
     @posts = Post.all
+    @posts.each do |p|
+      count_votes(p)
+    end
   end
   
   def post_params
@@ -47,5 +50,14 @@ class PostsController < ApplicationController
   end
   
   def show
+    @post = Post.find(params[:id])
+    @comment = Comment.new
+    @comments = @post.comments
+    @comments.each {|c| count_votes(c)}
+  end
+  
+  def count_votes(post)
+    post.votecount = 1 + post.votes.sum(:value)
+    post.save
   end
 end

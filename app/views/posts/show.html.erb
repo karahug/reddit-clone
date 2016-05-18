@@ -1,2 +1,16 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<h1><%= link_to(@post.title, @post.link) %></h1>
+<% if not current_user.nil? %>
+    <%= form_for @comment do |f| %>
+        <%= f.text_area :content %>
+        <%= f.hidden_field :post_id, value: @post.id %>
+        <br />
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.submit %>
+    <% end %>
+<% end %>
+
+<% @comments.where(supercomment_id: nil).each do |c| %>
+    <%= render partial: "comment", locals: {supercomment_id: c.supercomment_id, comments: @comments, post: @post, comment: c } %>
+    
+
+<% end %>

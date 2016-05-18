@@ -1,4 +1,28 @@
 Rails.application.routes.draw do
+  get 'votes/create'
+
+  delete 'votes/destroy'
+
+  get 'votes/edit'
+
+  get 'votes/update'
+  
+  get 'votes/unvote'
+
+  get 'comments/update'
+
+  get 'comments/edit'
+
+  delete 'comments/destroy'
+
+  get 'comments/reply'
+
+  get 'comments/upvote'
+
+  get 'comments/downvote'
+
+  get 'comments/create'
+
   get 'posts/edit'
 
   get 'posts/update'
@@ -18,6 +42,12 @@ Rails.application.routes.draw do
   root 'posts#index'
   resources :users
   resources :posts
+  resources :votes
+  resources :comments do
+    collection do
+      get 'reply'
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

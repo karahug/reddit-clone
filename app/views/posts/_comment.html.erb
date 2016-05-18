@@ -1,0 +1,17 @@
+<div class="comment">
+<%= comment.votecount %>
+<%= link_to(comment.user.name, comment.user) %>
+    
+<br />
+<%= comment.content %>
+<br />
+<%= link_to("reply", {:controller => "comments", :action => "reply", :comment => {:supercomment_id => comment.id, :post_id => post.id}}) %>
+|<%= link_to("upvote", {controller: "votes", action: "create", vote: {value: 1, comment_id: comment.id}}) %>
+|<%=link_to("downvote", {controller: "votes", action: "create", vote: {value: -1, comment_id: comment.id}}) %>
+<% if not Vote.where(comment_id: comment.id, user_id: current_user.id).empty? %>
+    |<%=link_to("unvote", {controller: "votes", action: "unvote", vote: {comment_id: comment.id}}) %>
+<% end %>
+<% comments.where(supercomment_id: comment.id).each do |c|%>
+    <%= render partial: "comment", locals: {supercomment_id: comment.supercomment_id, comments: comments, post: post, comment: c} %>
+<% end %>
+</div>

@@ -1,5 +1,4 @@
 <h1>Front Page</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
 
 <div>
     <%= link_to("New post", new_post_path) %>
@@ -9,13 +8,21 @@
 
 <% @posts.each do |p| %>
     <p>
+        <%= p.votecount %>|
         <%= link_to(p.title, p.link) if not p.link.nil? %> 
-        <%= link_to(p.title, p) if p.link.nil? %><br />
-        <%= link_to("Comments", p) %>|
+        <%= link_to(p.title, p) if p.link.nil? %>
+        
+        <br />
+        <%= link_to("#{p.comments.count} comments", p) %>|
         <% if p.user == current_user %>
             <%= link_to("Delete", p, method: :delete) %>
             |
             <%= link_to("Edit", edit_post_path(p)) %>
+        <% end %>
+        |<%= link_to("upvote", {controller: "votes", action: "create", vote: {value: 1, post_id: p.id}}) %>
+        |<%=link_to("downvote", {controller: "votes", action: "create", vote: {value: -1, post_id: p.id}}) %>
+        <% if not Vote.where(post_id: p.id, user_id: current_user.id).empty? %>
+            |<%=link_to("unvote", {controller: "votes", action: "unvote", vote: {post_id: p.id}}) %>
         <% end %>
     </p>
     

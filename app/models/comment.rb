@@ -7,4 +7,6 @@ class Comment < ActiveRecord::Base
     
     validates :user_id, presence: true
     validates :content, presence: true
+    
+    default_scope {order(:votecount => :desc)}
 end
