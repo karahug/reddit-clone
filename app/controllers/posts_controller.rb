@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_filter :authenticate_user!, only: [:create, :edit, :new, :destroy]
+  before_filter :authenticate_user!, only: [:create, :edit, :new, :destroy, :index]
   
   def edit
     @post = Post.find(params[:id])
