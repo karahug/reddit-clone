@@ -25,6 +25,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params.merge(user_id: current_user.id))
     @post.save
+    Vote.new(post_id: @post.id, value: 1, user_id: current_user.id).save
     redirect_to @post
   end
   
@@ -57,7 +58,7 @@ class PostsController < ApplicationController
   end
   
   def count_votes(post)
-    post.votecount = 1 + post.votes.sum(:value)
+    post.votecount = post.votes.sum(:value)
     post.save
   end
 end

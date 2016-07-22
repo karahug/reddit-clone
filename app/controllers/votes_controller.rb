@@ -8,12 +8,23 @@ class VotesController < ApplicationController
         x.destroy
     end
     @vote.save
-    redirect_to :back
+    
+    respond_to do |format|
+      format.html{redirect_to root_path}
+      format.js {}
+    end
+
   end
 
   def destroy
+    
     @vote = Vote.find(params[:id])
     @vote.destroy
+    
+    respond_to do |format|
+      format.html {redirect_to root_path }
+      format.js {}
+    end
   end
 
   def edit

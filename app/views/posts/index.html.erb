@@ -1,29 +1,38 @@
-<h1>Front Page</h1>
-
-<div>
-    <%= link_to("New post", new_post_path) %>
-</div>
-
-<hr />
-
-<% @posts.each do |p| %>
-    <p>
-        <%= p.votecount %>|
-        <%= link_to(p.title, p.link) if not p.link.nil? %> 
-        <%= link_to(p.title, p) if p.link.nil? %>
-        
-        <br />
-        <%= link_to("#{p.comments.count} comments", p) %>|
-        <% if p.user == current_user %>
-            <%= link_to("Delete", p, method: :delete) %>
-            |
-            <%= link_to("Edit", edit_post_path(p)) %>
-        <% end %>
-        |<%= link_to("upvote", {controller: "votes", action: "create", vote: {value: 1, post_id: p.id}}) %>
-        |<%=link_to("downvote", {controller: "votes", action: "create", vote: {value: -1, post_id: p.id}}) %>
-        <% if not Vote.where(post_id: p.id, user_id: current_user.id).empty? %>
-            |<%=link_to("unvote", {controller: "votes", action: "unvote", vote: {post_id: p.id}}) %>
-        <% end %>
-    </p>
+<head>
+    <%= javascript_include_tag :defaults %>
+    <%= csrf_meta_tag %>
+</head>
+<body class="pages index">
+    <h1>Front Page</h1>
     
-<% end %>
+    <div>
+        <%= link_to("New post", new_post_path) %>
+    </div>
+    
+    <hr />
+    
+    <% @posts.each do |p| %>
+        <div id=<%='post' + p.id.to_s %> >
+            <div id=<%='vote' + p.id.to_s %>>
+                <% currentVote = Vote.where(post_id: p.id, user_id: current_user)[0] %>
+                <% voteValue = currentVote ? currentVote.value : 0 %>
+                <% downvoteAction = voteValue == -1 ?  votes_destroy_path(id: currentVote.id) : votes_create_path(vote: {value: -1, post_id: p.id }) %>
+                <% upvoteAction = voteValue == 1 ? votes_destroy_path(id: currentVote.id) : votes_create_path(vote: {value: 1, post_id: p.id})%>
+                <%= button_to "upvoteButton", upvoteAction, method: voteValue == 1 ? "delete" : "post", remote: true, class: "upvoteButton #{voteValue == 1 ? "clicked" : ""}" %> 
+                <%= button_to "downvoteButton", downvoteAction, method: voteValue == -1 ? "delete" : "post", remote: true, class: "downvoteButton #{voteValue == -1 ? "clicked" : ""}" %>
+                <span><%= p.votecount %></span>
+            </div>
+            <%= link_to(p.title, p.link) if not p.link == '' %> 
+            <%= link_to(p.title, p) if p.link == '' %>
+            
+            <br />
+            <%= link_to("#{p.comments.count} comments", p) %>|
+            <% if p.user == current_user %>
+                <%= link_to("Delete", p, method: :delete) %>
+                |
+                <%= link_to("Edit", edit_post_path(p)) %>
+            <% end %>
+        </div>
+        
+    <% end %>
+</body>

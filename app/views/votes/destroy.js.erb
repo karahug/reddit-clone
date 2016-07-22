@@ -1,0 +1,7 @@
+<% postId = @vote.post_id %>
+var voteDiv = $('#vote<%= postId %>');
+<% voteCount = Post.where(id: postId)[0].votes.sum(:value) %>
+
+voteDiv.find('span').first().html('<%= voteCount %>');
+voteDiv.find('form').first().replaceWith($('<%= button_to "upvoteButton", votes_create_path(vote: {value: 1, post_id: postId}), remote: true %>'));
+voteDiv.find('form').last().replaceWith($('<%= button_to "downvoteButton", votes_create_path(vote: {value: -1, post_id: postId}), remote: true %>'));

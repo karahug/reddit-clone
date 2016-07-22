@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'votes/create'
+  post 'votes/create'
 
   delete 'votes/destroy'
 

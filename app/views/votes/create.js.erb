@@ -1,0 +1,14 @@
+<% postId = @vote.post_id %>
+<% commentId = @vote.comment_id %>
+var voteDiv = $('#vote<%= postId %>');
+<% voteCount = Post.where(id: postId)[0].votes.sum(:value) %>
+<% myVote = @vote.value %>
+
+voteDiv.find('span').first().html('<%= voteCount %>');
+<% if myVote == 1 %>
+    voteDiv.find('form').first().replaceWith($('<%= button_to "upvoteButton", votes_destroy_path(id: @vote.id), method: 'delete', class: 'clicked', remote: true %>'));
+    voteDiv.find('form').last().replaceWith($('<%= button_to "downvoteButton", votes_create_path(vote: {value: -1, post_id: postId, comment_id: commentId}), remote: true %>'));
+<% else %>
+    voteDiv.find('form').first().replaceWith($('<%= button_to "upvoteButton", votes_create_path(vote: {value: 1, post_id: postId, comment_id: commentId}), remote: true %>'));
+    voteDiv.find('form').last().replaceWith($('<%= button_to "downvoteButton", votes_destroy_path(id: @vote.id), method: 'delete', class: 'clicked', remote: true %>'));
+<% end %>

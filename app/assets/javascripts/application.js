@@ -11,4 +11,5 @@
 // about supported directives.
 //
 //= require jquery
-//= require posts
+//= require jquery_ujs
+//= require turbolinks

@@ -6,6 +6,14 @@
 <%= comment.content %>
 <br />
 <%= link_to("reply", {:controller => "comments", :action => "reply", :comment => {:supercomment_id => comment.id, :post_id => post.id}}) %>
+<% if false %>
+    <% currentVote = Vote.where(comment_id: comment.id, user_id: current_user)[0] %>
+    <% voteValue = currentVote ? currentVote.value : 0 %>
+    <% upvoteAction = voteValue == 1 ? votes_destroy_path(id: currentVote.id) : votes_create_path(vote: {value: 1, comment_id: comment.id})%>
+    <% downvoteAction = voteValue == -1 ?  votes_destroy_path(id: currentVote.id) : votes_create_path(vote: {value: -1, comment_id: comment.id }) %>
+    <%= button_to "upvoteButton", upvoteAction, method: voteValue == 1 ? "delete" : "post", remote: true, class: "upvoteButton #{voteValue == 1 ? "clicked" : ""}" %> 
+    <%= button_to "downvoteButton", downvoteAction, method: voteValue == -1 ? "delete" : "post", remote: true, class: "downvoteButton #{voteValue == -1 ? "clicked" : ""}" %>
+<% end %>
 |<%= link_to("upvote", {controller: "votes", action: "create", vote: {value: 1, comment_id: comment.id}}) %>
 |<%=link_to("downvote", {controller: "votes", action: "create", vote: {value: -1, comment_id: comment.id}}) %>
 <% if not Vote.where(comment_id: comment.id, user_id: current_user.id).empty? %>
