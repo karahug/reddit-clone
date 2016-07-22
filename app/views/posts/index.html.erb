@@ -26,6 +26,7 @@
             <%= link_to(p.title, p) if p.link == '' %>
             
             <br />
+            <%= p.user.name %>
             <%= link_to("#{p.comments.count} comments", p) %>|
             <% if p.user == current_user %>
                 <%= link_to("Delete", p, method: :delete) %>
