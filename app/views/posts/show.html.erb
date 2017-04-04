@@ -1,3 +1,31 @@
+<head>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tag %>
+</head>
+
+<div class="postVotes" id=<%= 'vote' + @post.id.to_s %> >
+    <% currentVote = Vote.where(post_id: @post.id, user_id: current_user)[0] %>
+    <% postVoteValue = currentVote ? currentVote.value : 0 %>
+    <% downvoteAction = postVoteValue == -1 ?
+        votes_destroy_path(id: currentVote.id) :
+        votes_create_path(vote: {value: -1, post_id: @post.id }) %>
+    <% upvoteAction = postVoteValue == 1 ?
+    votes_destroy_path(id: currentVote.id) :
+    votes_create_path(vote: {value: 1, post_id: @post.id }) %>
+    <span> <%= @post.votecount %> </span>
+    <%= button_to "upvoteButton",
+        upvoteAction,
+        method: postVoteValue  == 1? "delete" : "post",
+        remote: true,
+        class: "upvoteButton #{postVoteValue == 1 ? "clicked" : ""}"
+    %>
+    <%= button_to "downvoteButton",
+        downvoteAction,
+        method: postVoteValue == -1 ? "delete": "post",
+        remote: true,
+        class: "downvoteButton #{postVoteValue == -1 ? "clicked" : ""}"
+    %>
+</div>
 <h1><%= link_to(@post.title, @post.link) %></h1>
 <% if not current_user.nil? %>
     <%= form_for @comment do |f| %>
@@ -10,7 +38,9 @@
 <% end %>
 
 <% @comments.where(supercomment_id: nil).each do |c| %>
-    <%= render partial: "comment", locals: {supercomment_id: c.supercomment_id, comments: @comments, post: @post, comment: c } %>
-    
+    <%= render partial: "comment",
+        locals: {supercomment_id: c.supercomment_id,
+                 comments: @comments,
+                 post: @post, comment: c } %>
 
 <% end %>

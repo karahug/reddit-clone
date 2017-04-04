@@ -1,0 +1,5 @@
+handle creating posts without content or link
+* add ajax buttons for comment upvotes and downvotes, ideally in javascripts rather than in views
+* create better test suite
+* improve css
+* add upvote/downvote for post in show posts
