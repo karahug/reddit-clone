@@ -1,0 +1,24 @@
+<div class="vote">
+    <% myVote = Vote.where(post_id: post.id, user_id: current_user.id)[0] %>
+    <% myVoteValue = myVote ? myVote.value : 0 %>
+    <% voteCount = post.votecount %>
+    <%= button_to "upvote",
+        votes_update_path(vote: {value: 1,
+                                 post_id: post.id}),
+         method: "post",
+         remote: true,
+         class: "upvoteButton" + (myVoteValue == 1 ? " clicked" : ""),
+         form_class: "upvoteForm"
+     %>
+    <span><%=voteCount%></span>
+    <%= button_to "downvote",
+        votes_update_path(vote: {value: -1,
+                                 post_id: post.id}),
+         method: "post",
+         remote: true,
+         class: "downvoteButton" + (myVoteValue == -1 ? " clicked" : ""),
+         form_class: "downvoteForm"
+     %>
+    <%= inline_svg("#{Rails.root}/app/assets/images/upvote.svg", class: "upvoteButton" + (myVoteValue == 1 ? " clicked" : "")) %>
+    <%= inline_svg("#{Rails.root}/app/assets/images/upvote.svg", class: "downvoteButton"+ (myVoteValue == -1 ? " clicked" : "")) %>
+</div>

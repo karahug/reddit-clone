@@ -1,0 +1,9 @@
+<head>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tag %>
+</head>
+<div>
+    <%= button_to "upvoteButton",
+    votes_update_path(vote: { value: 1, post_id: @post_id, comment_id: @comment_id }),
+    method:
+</div>

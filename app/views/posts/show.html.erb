@@ -1,31 +1,8 @@
 <head>
-    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tag %>
 </head>
+<%= render partial: "showVotes", locals: {post: @post, current_user: current_user} %>
 
-<div class="postVotes" id=<%= 'vote' + @post.id.to_s %> >
-    <% currentVote = Vote.where(post_id: @post.id, user_id: current_user)[0] %>
-    <% postVoteValue = currentVote ? currentVote.value : 0 %>
-    <% downvoteAction = postVoteValue == -1 ?
-        votes_destroy_path(id: currentVote.id) :
-        votes_create_path(vote: {value: -1, post_id: @post.id }) %>
-    <% upvoteAction = postVoteValue == 1 ?
-    votes_destroy_path(id: currentVote.id) :
-    votes_create_path(vote: {value: 1, post_id: @post.id }) %>
-    <span> <%= @post.votecount %> </span>
-    <%= button_to "upvoteButton",
-        upvoteAction,
-        method: postVoteValue  == 1? "delete" : "post",
-        remote: true,
-        class: "upvoteButton #{postVoteValue == 1 ? "clicked" : ""}"
-    %>
-    <%= button_to "downvoteButton",
-        downvoteAction,
-        method: postVoteValue == -1 ? "delete": "post",
-        remote: true,
-        class: "downvoteButton #{postVoteValue == -1 ? "clicked" : ""}"
-    %>
-</div>
 <h1><%= link_to(@post.title, @post.link) %></h1>
 <% if not current_user.nil? %>
     <%= form_for @comment do |f| %>
@@ -43,4 +20,4 @@
                  comments: @comments,
                  post: @post, comment: c } %>
 
-<% end %>
+         <% end %>

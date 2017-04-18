@@ -94,6 +94,9 @@ GEM
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
     i18n (0.8.1)
+    inline_svg (1.1.0)
+      activesupport (>= 3.0)
+      nokogiri (>= 1.6)
     jbuilder (2.6.3)
       activesupport (>= 3.0.0, < 5.2)
       multi_json (~> 1.2)
@@ -248,6 +251,7 @@ DEPENDENCIES
   factory_girl_rails
   guard
   guard-rspec
+  inline_svg
   jbuilder (~> 2.0)
   jquery-rails
   pg

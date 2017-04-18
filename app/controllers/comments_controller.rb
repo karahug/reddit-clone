@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_filter :authenticate_user!
-  
+
   def update
   end
 
@@ -26,10 +26,10 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.save
     count_votes(@comment)
-    
+    Vote.new(comment_id: @comment.id, user_id: @comment.user_id, value: 1).save
     redirect_to @comment.post
   end
-  
+
   def comment_params
     params.require(:comment).permit(:user_id, :post_id, :content, :supercomment_id)
   end

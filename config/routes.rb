@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   post 'votes/create'
 
+  post 'votes/update'
+
   delete 'votes/destroy'
 
   get 'votes/edit'
 
   get 'votes/update'
-  
+
   get 'votes/unvote'
 
   get 'comments/update'
@@ -32,9 +34,9 @@ Rails.application.routes.draw do
   get 'posts/upvote'
 
   get 'posts/downvote'
-  
+
   get 'posts/show'
-  
+
   delete 'posts/destroy'
 
   get 'posts/create'
