@@ -1,4 +1,5 @@
-console.log('running js');
+// needs to be idempotent
+
 var ready = function(){
     var upvoteForm = $(".upvoteForm");
     var downvoteForm = $(".downvoteForm");
@@ -12,6 +13,7 @@ var ready = function(){
         var votecount = xhr.voteCount;
         upvoteButton.toggleClass("clicked", voteValue == 1);
         downvoteButton.toggleClass("clicked", voteValue == -1);
+        upvoteButton.removeClass("loading");
         voteCountSpan.text(votecount + "");
     });
     downvoteForm.on("ajax:success", function(e, xhr){
@@ -22,22 +24,26 @@ var ready = function(){
         var votecount = xhr.voteCount;
         downvoteButton.toggleClass("clicked", voteValue == -1);
         upvoteButton.toggleClass("clicked", voteValue == 1);
+        downvoteButton.removeClass("loading");
         voteCountSpan.text(votecount + "");
+    });
+    upvoteForm.find("svg.upvoteButton").on("click", function(e){
+        $(this).addClass("loading");
+    });
+    downvoteForm.on("click", function(e){
+        $(this).find("svg.downvoteButton").addClass("loading");
     });
 };
 
 function addLabel(form, buttonType){
-    form.each(function(){
+    form.not(":has(svg)").each(function(){
         $(this).append("<label class=" + buttonType +"Label></label>");
         var label = $(this).find("label");
-        var voteInput = $(this).find("input[type='submit']");
-        var svg = $(this).parent().find("svg." + buttonType + "Button");
-        console.log(label);
-        console.log($(this).parent());
+        var voteInput = $(this).find("input[type='submit']").first();
+        var svg = $(this).parent().find("svg." + buttonType + "Button").first();
         voteInput.appendTo(label);
         svg.appendTo(label);
     });
 }
 
-//$(document).ready(ready);
 $(document).on('turbolinks:load', ready);

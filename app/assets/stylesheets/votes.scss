@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $upvote-color: #f47442;
 $default-grey: #b9c0cc;
+$yellow: rgb(226, 202, 93);
 svg.upvoteButton{
     display: block;
     fill: $default-grey ;
@@ -13,6 +14,9 @@ svg.upvoteButton{
     }
     &:not(.clicked){
         fill: $default-grey;
+    }
+    &.loading{
+        fill: $yellow;
     }
 }
 svg.downvoteButton{
@@ -27,8 +31,17 @@ svg.downvoteButton{
     &:not(.clicked){
         fill: $default-grey;
     }
+    &.loading{
+        fill: $yellow;
+    }
 }
 
 input.downvoteButton, input.upvoteButton{
     display: none;
 }
+
+.vote {
+    display: inline-block;
+    text-align: center;
+}
+

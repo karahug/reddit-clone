@@ -1,9 +1,12 @@
 <head>
     <%= csrf_meta_tag %>
 </head>
+
+<div class="postTitle">
 <%= render partial: "showVotes", locals: {post: @post, current_user: current_user} %>
 
 <h1><%= link_to(@post.title, @post.link) %></h1>
+</div>
 <% if not current_user.nil? %>
     <%= form_for @comment do |f| %>
         <%= f.text_area :content %>

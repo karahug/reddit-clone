@@ -13,3 +13,26 @@
  *= require_tree .
  *= require_self
  */
+html, body{
+    height: 100%;
+    width: 100%;
+}
+
+.header{
+    margin-bottom: 0px;
+    box-sizing: border-box;
+}
+.contentWrapper{
+    margin: auto;
+    padding: 0px;
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+    width: 80%;
+    text-align: left;
+}
+
+body{
+    vertical-align: top;
+    text-align: center;
+}

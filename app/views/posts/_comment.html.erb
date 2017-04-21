@@ -1,11 +1,14 @@
-<div class="comment">
-    <%= render partial: "comments/showVotes", locals: {comment: comment, current_user: current_user} %>
-    <%= link_to(comment.user.name, comment.user) %>
-    <br />
-    <%= comment.content %>
-    <br />
-    <%= link_to("reply", {:controller => "comments", :action => "reply", :comment => {:supercomment_id => comment.id, :post_id => post.id}}) %>
+<% commentParity = commentParity || 'odd' %>
+<div class="<%="comment " + commentParity %>">
+    <div class="commentInfo">
+        <%= render partial: "comments/showVotes", locals: {comment: comment, current_user: current_user} %>
+    <div class="commentContent">
+        <%= link_to(comment.user.name, comment.user) %>
+        <%= comment.content %>
+        <%= link_to("reply", {:controller => "comments", :action => "reply", :comment => {:supercomment_id => comment.id, :post_id => post.id}}) %>
+    </div>
+    </div>
     <% comments.where(supercomment_id: comment.id).each do |c|%>
-        <%= render partial: "comment", locals: {supercomment_id: comment.supercomment_id, comments: comments, post: post, comment: c} %>
+        <%= render partial: "comment", locals: {supercomment_id: comment.supercomment_id, comments: comments, post: post, comment: c, commentParity: (commentParity == 'odd' ? 'even' : 'odd')} %>
     <% end %>
 </div>
