@@ -1,0 +1,188 @@
+/* line 4, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/comments.scss */
+.comment {
+  outline: 1px solid #b0b3b7;
+  box-sizing: border-box;
+  margin: 5px;
+  padding: 10px;
+}
+/* line 9, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/comments.scss */
+.comment.odd {
+  background-color: white;
+}
+/* line 12, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/comments.scss */
+.comment.even {
+  background-color: #d6d9db;
+}
+
+/* line 16, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/comments.scss */
+.commentInfo {
+  display: flex;
+  align-items: flex-start;
+}
+/* line 19, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/comments.scss */
+.commentInfo a {
+  display: block;
+}
+/* line 22, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/comments.scss */
+.commentInfo .commentContent {
+  margin-left: 10px;
+  display: block;
+}
+/* line 1, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/header.scss */
+html * {
+  font-family: Verdana;
+}
+
+/* line 5, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/header.scss */
+body {
+  font-family: Verdana;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 10, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/header.scss */
+.header {
+  margin: 0px;
+  background-color: #a9d3f9;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #6f99db;
+}
+/* line 16, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/header.scss */
+.header h1 {
+  flex-grow: 3;
+}
+/* line 19, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/header.scss */
+.header .loginInfo {
+  font-family: Verdana, Geneva, sans-serif;
+  flex-grow: 1;
+  text-align: right;
+}
+/* line 23, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/header.scss */
+.header .loginInfo div {
+  background-color: #eff6fc;
+  float: right;
+  padding: 3px;
+  border-radius: 3px 0px 0px 3px;
+}
+/* line 5, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/posts.scss */
+.comment {
+  padding-left: 50px;
+}
+
+/* line 9, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/posts.scss */
+.clicked {
+  color: orange;
+}
+
+/* line 12, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/posts.scss */
+.postIndexInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+/* line 17, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/posts.scss */
+.postIndex {
+  display: flex;
+}
+
+/* line 21, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/posts.scss */
+.postTitle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+/* line 25, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/posts.scss */
+.postTitle h1 {
+  margin-left: 10px;
+}
+/* line 7, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/votes.scss */
+svg.upvoteButton {
+  display: block;
+  fill: #b9c0cc;
+  width: 20px;
+  height: 20px;
+}
+/* line 12, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/votes.scss */
+svg.upvoteButton.clicked {
+  fill: #f47442;
+}
+/* line 15, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/votes.scss */
+svg.upvoteButton:not(.clicked) {
+  fill: #b9c0cc;
+}
+/* line 18, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/votes.scss */
+svg.upvoteButton.loading {
+  fill: #e2ca5d;
+}
+
+/* line 22, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/votes.scss */
+svg.downvoteButton {
+  display: block;
+  fill: #b9c0cc;
+  width: 20px;
+  height: 20px;
+  transform: rotate(180deg);
+}
+/* line 28, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/votes.scss */
+svg.downvoteButton.clicked {
+  fill: #f47442;
+}
+/* line 31, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/votes.scss */
+svg.downvoteButton:not(.clicked) {
+  fill: #b9c0cc;
+}
+/* line 34, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/votes.scss */
+svg.downvoteButton.loading {
+  fill: #e2ca5d;
+}
+
+/* line 39, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/votes.scss */
+input.downvoteButton, input.upvoteButton {
+  display: none;
+}
+
+/* line 43, /home/tyrone/Documents/reddit-clone/app/assets/stylesheets/votes.scss */
+.vote {
+  display: inline-block;
+  text-align: center;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+
+html, body{
+    height: 100%;
+    width: 100%;
+}
+
+.header{
+    margin-bottom: 0px;
+    box-sizing: border-box;
+}
+.contentWrapper{
+    margin: auto;
+    padding: 0px;
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+    width: 80%;
+    text-align: left;
+}
+
+body{
+    vertical-align: top;
+    text-align: center;
+}
