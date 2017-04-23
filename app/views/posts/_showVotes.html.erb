@@ -19,6 +19,6 @@
          class: "downvoteButton" + (myVoteValue == -1 ? " clicked" : ""),
          form_class: "downvoteForm"
      %>
-    <%= inline_svg("#{Rails.root}/app/assets/images/upvote.svg", class: "upvoteButton" + (myVoteValue == 1 ? " clicked" : "")) %>
-    <%= inline_svg("#{Rails.root}/app/assets/images/upvote.svg", class: "downvoteButton"+ (myVoteValue == -1 ? " clicked" : "")) %>
+    <%= svg(asset_path("upvote.svg"), "upvoteButton" + (myVoteValue == 1 ? " clicked" : ""))%>
+    <%= svg(asset_path("upvote.svg"), "downvoteButton" + (myVoteValue == -1 ? " clicked" : "")) %>
 </div>
